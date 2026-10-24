@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>JET Schematics — схемы призыва</title>
+<style>
+:root{--bg:#07080a;--bg2:#0f1115;--card:#0e1013;--text:#e7e7ea;--mut:#8b8f98;--acc:#d3302f;--acc2:#7c3aed;--bd:#22262d;--danger:#ff4d4d;color-scheme:dark;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+:root[data-theme="light"]{--bg:#efeaea;--bg2:#e3dcdc;--card:#fff;--text:#1a1416;--mut:#6b5f62;--acc:#b3201f;--acc2:#6d28d9;--bd:#d6cccc;--danger:#c4281f;color-scheme:light}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:env(safe-area-inset-top,0px)}
+body{margin:0;background:var(--bg);color:var(--text);font-family:Inter,system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;line-height:1.55;background-image:radial-gradient(900px 400px at 85% -5%,color-mix(in srgb,var(--acc2) 22%,transparent),transparent),radial-gradient(800px 400px at 0% 10%,color-mix(in srgb,var(--acc) 18%,transparent),transparent)}
+.wrap{max-width:1080px;margin:0 auto;padding:0 20px}
+header{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;backdrop-filter:blur(14px);background:color-mix(in srgb,var(--bg) 75%,transparent);border-bottom:1px solid var(--bd)}
+.nav{display:flex;align-items:center;justify-content:space-between;height:60px}
+.logo{display:flex;align-items:center;gap:10px;font-weight:800;letter-spacing:.5px}
+.logo i{display:grid;place-items:center;width:34px;height:34px;border-radius:9px;background:linear-gradient(135deg,var(--acc),var(--acc2));color:#fff;font-style:normal;font-size:14px}
+nav{display:flex;gap:18px;align-items:center;font-size:14px}
+nav a{color:var(--mut);text-decoration:none}nav a:hover{color:var(--text)}
+button{font:inherit;cursor:pointer}
+.tbtn{background:var(--card);border:1px solid var(--bd);color:var(--text);border-radius:10px;padding:6px 10px}
+.hero{padding:76px 0 40px;text-align:center}
+.pill{display:inline-block;font-size:12px;padding:5px 12px;border-radius:99px;border:1px solid var(--bd);background:var(--card);color:var(--mut)}
+h1{font-size:clamp(34px,6vw,62px);line-height:1.05;margin:18px 0 14px;letter-spacing:-1.5px}
+h1 span{background:linear-gradient(90deg,var(--acc),var(--acc2));-webkit-background-clip:text;background-clip:text;color:transparent}
+.hero p{max-width:600px;margin:0 auto;color:var(--mut);font-size:18px}
+.stats{display:flex;justify-content:center;gap:34px;margin-top:34px;flex-wrap:wrap}
+.stats b{display:block;font-size:26px}.stats small{color:var(--mut)}
+h2{font-size:28px;margin:50px 0 6px;letter-spacing:-.5px}
+.sub{color:var(--mut);margin:0 0 22px}
+.chips{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:22px}
+.chip{border:1px solid var(--bd);background:var(--card);color:var(--text);padding:6px 14px;border-radius:99px;font-size:14px}
+.chip.on{background:var(--acc);color:#fff;border-color:var(--acc)}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:18px}
+.card{background:var(--card);border:1px solid var(--bd);border-radius:18px;overflow:hidden;text-align:left;color:inherit;padding:0;transition:.2s}
+.card:hover{transform:translateY(-6px);border-color:var(--acc);box-shadow:0 18px 40px -18px var(--acc)}
+.pic{aspect-ratio:1;display:grid;place-items:center;background:linear-gradient(160deg,var(--bg2),var(--bg));padding:26px}
+.pic svg{width:100%;height:100%;image-rendering:pixelated;filter:drop-shadow(0 8px 14px rgba(0,0,0,.35))}
+.cb{padding:14px 16px 18px}
+.cb h3{margin:0 0 4px;font-size:19px}
+.cb p{margin:0 0 12px;color:var(--mut);font-size:14px}
+.row{display:flex;justify-content:space-between;align-items:center;font-size:12px;color:var(--mut)}
+.skull{letter-spacing:2px;color:var(--danger)}
+.skull s{text-decoration:none;opacity:.25;color:var(--mut)}
+.about{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px}
+.box{background:var(--card);border:1px solid var(--bd);border-radius:16px;padding:20px}
+.box h4{margin:0 0 6px}.box p{margin:0;color:var(--mut);font-size:14px}
+footer{margin:70px 0 30px;border-top:1px solid var(--bd);padding-top:24px;color:var(--mut);font-size:13px;display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
+.modal{position:fixed;inset:0;z-index:50;display:none;align-items:center;justify-content:center;background:rgba(0,0,0,.6);backdrop-filter:blur(6px);padding:16px}
+.modal.open{display:flex}
+.sheet{background:var(--card);border:1px solid var(--bd);border-radius:22px;max-width:760px;width:100%;max-height:90vh;overflow:auto;position:relative;animation:up .25s ease}
+@keyframes up{from{transform:translateY(20px);opacity:0}}
+.mh{display:flex;gap:18px;align-items:center;padding:24px;background:linear-gradient(160deg,var(--bg2),var(--card));border-bottom:1px solid var(--bd)}
+.mh .pic{width:110px;flex:none;padding:10px;border-radius:14px;aspect-ratio:1}
+.mh h2{margin:0 0 6px;font-size:28px}
+.x{position:absolute;top:12px;right:12px;width:36px;height:36px;border-radius:50%;border:1px solid var(--bd);background:var(--card);color:var(--text);font-size:18px}
+.mb{padding:22px 24px 26px}
+.auth{display:flex;align-items:center;gap:10px;margin-bottom:14px}
+.av{width:38px;height:38px;border-radius:50%;display:grid;place-items:center;color:#fff;font-weight:700;background:linear-gradient(135deg,var(--acc),var(--acc2))}
+.auth small{color:var(--mut);display:block;line-height:1.2}
+.mb h5{font-size:13px;text-transform:uppercase;letter-spacing:1px;color:var(--acc);margin:22px 0 8px}
+ol{padding-left:20px;margin:0}ol li{margin-bottom:8px}
+.code{position:relative;background:#0a0f0b;color:#7dff9f;font:13px/1.5 ui-monospace,Menlo,Consolas,monospace;padding:14px 70px 14px 14px;border-radius:12px;word-break:break-all}
+.cp{position:absolute;top:8px;right:8px;font-size:12px;background:#1d2b21;color:#cfe;border:1px solid #2f4535;border-radius:8px;padding:4px 9px}
+.warn{margin-top:20px;padding:12px 14px;border-radius:12px;background:color-mix(in srgb,var(--danger) 14%,transparent);border:1px solid color-mix(in srgb,var(--danger) 45%,transparent);font-size:13px}
+.tags{display:flex;gap:8px;flex-wrap:wrap;margin-top:6px}
+.tag{font-size:12px;padding:3px 10px;border-radius:99px;border:1px solid var(--bd);color:var(--mut)}
+@media(max-width:560px){nav a{display:none}.mh{flex-direction:column;align-items:flex-start;padding-top:56px}}
+body::before{content:"";position:fixed;inset:0;pointer-events:none;z-index:1;background:radial-gradient(ellipse at center,transparent 45%,rgba(0,0,0,.65) 100%)}
+:root[data-theme="light"] body::before{display:none}
+.hero h1 span{animation:flick 6s infinite}
+@keyframes flick{0%,90%,100%{opacity:1}91%{opacity:.35}92%{opacity:1}95%{opacity:.6}96%{opacity:1}}
+.pic{position:relative}.pic::after{content:"";position:absolute;inset:0;background:repeating-linear-gradient(0deg,rgba(0,0,0,.16) 0 2px,transparent 2px 4px);pointer-events:none}
+.card:hover .pic svg{filter:drop-shadow(0 0 14px var(--acc))}
+section{scroll-margin-top:70px}
+.notice{margin:18px 0 0;padding:12px 16px;border:1px solid var(--bd);border-radius:12px;background:var(--card);font-size:14px;color:var(--mut)}
+.hl{background:#ffd84a;color:#1a1400;padding:1px 8px;border-radius:6px;border:0;cursor:pointer;font:inherit;font-weight:700;text-decoration:none}
+.hl:hover{filter:brightness(1.08)}
+.foot-note{margin:40px 0 0;color:var(--mut);font-size:13px;text-align:center}
+.page{display:none}.page.on{display:block}
+.back{background:none;border:0;color:var(--mut);padding:0;margin:26px 0 0;font-size:14px}.back:hover{color:var(--text)}
+.role{display:grid;grid-template-columns:repeat(auto-fit,minmax(290px,1fr));gap:18px;margin-top:18px}
+.ex{margin:12px 0;padding:12px 14px;border-left:3px solid #ffd84a;background:var(--bg2);border-radius:0 10px 10px 0;font-size:14px;color:var(--text)}
+.mail{display:inline-block;margin:8px 0;padding:8px 14px;border-radius:10px;background:var(--bg2);border:1px solid var(--bd);font:14px ui-monospace,Menlo,Consolas,monospace;color:var(--text);word-break:break-all;text-decoration:none}
+.closed{margin:12px 0 0;font-size:13px;color:var(--danger)}
+.chatbox{margin:60px auto;max-width:480px;text-align:center;padding:36px 24px}
+@media(max-width:560px){nav a.keep{display:inline}}
+
+.lay{display:grid;grid-template-columns:repeat(7,1fr);gap:3px;max-width:300px}
+.cell{aspect-ratio:1;border-radius:4px;border:1px solid var(--bd);display:block}
+.two{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:20px}
+.leg{display:flex;gap:6px 12px;flex-wrap:wrap;font-size:12px;color:var(--mut);margin-top:12px}
+.leg span{display:inline-flex;align-items:center;gap:5px}.leg i{width:12px;height:12px;border-radius:3px;display:inline-block;border:1px solid var(--bd)}
+.soon{border-style:dashed;display:grid;place-items:center;text-align:center;padding:30px 18px;color:var(--mut);min-height:260px}
+.soon b{display:block;color:var(--text);font-size:19px;margin:8px 0 4px}
+.remind{margin-top:22px;padding:12px 14px;border-radius:12px;background:#ffd84a;color:#1a1400;font-size:14px;font-weight:600}
+ul.mat{margin:0;padding-left:20px;columns:2;font-size:14px}
+</style>
+</head>
+<body>
+<header><div class="wrap nav">
+<div class="logo"><i>JS</i><span>JET Schematics</span></div>
+<nav><a href="https://claude.ai/artifact/EEDifgQBUmwpycY6FtxBXc" target="_blank" rel="noopener" class="keep">← Основной сайт</a><button class="tbtn" id="theme" aria-label="Тема">◐</button></nav>
+</div></header>
+<main class="wrap">
+<div class="notice">*Напоминание: специальная команда для призыва выдаётся только <a class="hl" href="https://claude.ai/artifact/EEDifgQBUmwpycY6FtxBXc#members" target="_blank" rel="noopener">участникам</a> JET.</div>
+<section class="hero">
+<span class="pill">🧱 Подсайт JavaErrorTeam</span>
+<h1>JET <span>Schematics</span></h1>
+<p>Схемы построек и механизмов для способностей. Собери основание, поставь механизм — и сущность откликнется.</p>
+<div class="stats"><div><b>1</b><small>схема в архиве</small></div><div><b>2</b><small>слоя в схеме</small></div><div><b>скоро</b><small>больше схем</small></div></div>
+</section>
+<section id="schemes">
+<h2>Схемы призыва</h2>
+<p class="sub">Нажми на карточку — откроется схема постройки и список материалов.</p>
+<div class="grid" id="grid"></div>
+</section>
+<p class="foot-note">*Позже сделаем больше схем. Следи за обновлениями.</p>
+<footer><span>© 2026 JET Schematics — подсайт JavaErrorTeam.</span><span>Не связано с Mojang и Microsoft.</span></footer>
+</main>
+<div class="modal" id="modal"><div class="sheet" id="sheet"></div></div>
+<script>
+var PAL={E:'#5a3416',B:'#8b5a2b',H:'#111',W:'#fff',L:'#3b8cff',T:'#d9b383',K:'#111'};
+var FACE=['.E.HH.E.','EEHHHHEE','BBBBBBBB','BWLBBLWB','BBBBBBBB','BBTKKTBB','BTTTTTTB','BBTTTTBB'];
+var C={B:['#1a1a1a','Чёрный бетон'],R:['#c0201c','Редстоун'],N:['#8b5a2b','Нотный блок'],G:['#ffd23f','Золотой блок'],C:['#c07a2e','Командный блок'],T:['#ff5a3c','Редстоуновый факел'],P:['#9b9b9b','Нажимная плита'],'.':['var(--bg2)','Пусто']};
+var L1=['BBBBBBB','B..R..B','B.G.G.B','BR.N.RB','B.G.G.B','B..R..B','BBBBBBB'];
+var L2=['.......','...C...','.T...T.','...P...','.T...T.','.......','.......'];
+var ROLE={Obsidian_Ray:'Билдер',Redstone_Witch:'Редстоун-инженер',PixelReaper:'Пиксель-арт'};
+var S={name:'Фредди',tag:'Аниматроник',danger:4,date:'20 октября 2026',team:['Obsidian_Ray','Redstone_Witch','PixelReaper'],
+ desc:'Бурый медведь в цилиндре. Оживает в полночь и любит музыку нотных блоков.',
+ how:'Схема из двух слоёв: основание 7×7 с нотным блоком в центре и механизм из командного блока, факелов и нажимной плиты. Когда нотный блок звучит в полночь, механизм срабатывает.',
+ steps:['Построй основание 7×7 по схеме слоя 1: чёрный бетон по краю, золото по диагоналям.','Выложи редстоун крестом вокруг центра и поставь нотный блок в середину.','Собери слой 2: командный блок на севере, факелы по углам, нажимная плита в центре.','Вставь в командный блок специальную команду — её выдают только участникам.','Дождись полуночи (12 ночи по игровому времени) и ударь по нотному блоку пять раз.']};
+function px(){var s='<svg viewBox="0 0 8 8" shape-rendering="crispEdges" aria-hidden="true">';for(var y=0;y<8;y++)for(var x=0;x<8;x++){var c=PAL[FACE[y][x]];if(c)s+='<rect x="'+x+'" y="'+y+'" width="1" height="1" fill="'+c+'"/>'}return s+'</svg>'}
+function skull(n){var s='';for(var i=1;i<=5;i++)s+=i<=n?'☠':'<s>☠</s>';return '<span class="skull">'+s+'</span>'}
+function lay(L,t){var h='<div><h5>'+t+'</h5><div class="lay">';L.forEach(function(r){r.split('').forEach(function(c){h+='<i class="cell" title="'+C[c][1]+'" style="background:'+C[c][0]+'"></i>'})});return h+'</div></div>'}
+var grid=document.getElementById('grid');
+var b=document.createElement('button');b.className='card';
+b.innerHTML='<div class="pic">'+px()+'</div><div class="cb"><h3>'+S.name+'</h3><p>'+S.desc+'</p><div class="row"><span>'+S.team[0]+' +'+(S.team.length-1)+'</span>'+skull(S.danger)+'</div></div>';
+b.onclick=openM;grid.appendChild(b);
+var soon=document.createElement('div');soon.className='card soon';
+soon.innerHTML='<div><div style="font-size:34px">🔒</div><b>Скоро</b>Позже сделаем больше схем</div>';grid.appendChild(soon);
+var modal=document.getElementById('modal'),sheet=document.getElementById('sheet');
+function openM(){
+ var cnt={};L1.concat(L2).join('').split('').forEach(function(c){if(c!=='.')cnt[c]=(cnt[c]||0)+1});
+ var mat=Object.keys(cnt).map(function(c){return '<li>'+C[c][1]+' ×'+cnt[c]+(c==='C'?' (выдаётся участникам)':'')+'</li>'}).join('');
+ var leg=Object.keys(cnt).map(function(c){return '<span><i style="background:'+C[c][0]+'"></i>'+C[c][1]+'</span>'}).join('');
+ var av=S.team.map(function(n,i){return '<div class="av" style="'+(i?'margin-left:-10px;':'')+'border:2px solid var(--card)">'+n[0]+'</div>'}).join('');
+ var tg=S.team.map(function(n){return '<span class="tag">'+n+' — '+ROLE[n]+'</span>'}).join('');
+ sheet.innerHTML='<button class="x" aria-label="Закрыть">✕</button>'+
+ '<div class="mh"><div class="pic">'+px()+'</div><div><h2>Схема: '+S.name+'</h2><div class="tags"><span class="tag">'+S.tag+'</span><span class="tag">Опасность: '+S.danger+'/5</span><span class="tag">2 слоя</span></div></div></div>'+
+ '<div class="mb"><div class="auth">'+av+'<div><b>'+S.team.join(', ')+'</b><small>Авторы схемы · JET Schematics · '+S.date+'</small></div></div><div class="tags" style="margin:-4px 0 12px">'+tg+'</div>'+
+ '<h5>Как это работает</h5><p style="margin:0">'+S.how+'</p>'+
+ '<h5>Схема (вид сверху)</h5><div class="two">'+lay(L1,'Слой 1 — основание')+lay(L2,'Слой 2 — механизм')+'</div><div class="leg">'+leg+'</div>'+
+ '<h5>Материалы</h5><ul class="mat">'+mat+'</ul>'+
+ '<h5>Как вызвать</h5><ol>'+S.steps.map(function(t){return '<li>'+t+'</li>'}).join('')+'</ol>'+
+ '<div class="remind">🔒 Напоминание: командный блок и специальная команда выдаются только участникам JET.</div></div>';
+ sheet.querySelector('.x').onclick=closeM;
+ modal.classList.add('open');document.body.style.overflow='hidden';sheet.scrollTop=0;
+}
+function closeM(){modal.classList.remove('open');document.body.style.overflow=''}
+modal.onclick=function(ev){if(ev.target===modal)closeM()};
+document.addEventListener('keydown',function(ev){if(ev.key==='Escape')closeM()});
+document.getElementById('theme').onclick=function(){var r=document.documentElement;r.dataset.theme=r.dataset.theme==='light'?'dark':'light'};
+</script>
+</body>
+</html>
